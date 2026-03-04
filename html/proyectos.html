@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyectos - SERVIVERDE S.A.C</title>
+    
+    <link rel="icon" type="image/png" href="../img/icono logo serviverde.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Audiowide&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { forest: '#1B4332', nature: '#2D5A27', lime: '#84CC16' },
+                    fontFamily: { sans: ['Montserrat', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="font-sans text-gray-800 bg-white overflow-x-hidden">
+
+<nav class="fixed w-full z-[1000] bg-[#1B4332]/80 backdrop-blur-xl border-b border-white/10 shadow-lg transition-all duration-300 py-4" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-4 group cursor-pointer relative z-[1001]">
+                <div class="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center  rounded-xl overflow-hidden   shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all group-hover:shadow-[0_0_20px_rgba(132,204,22,0.4)]">
+                    <img src="../img/icono logo serviverde.png" alt="SERVIVERDE Logo" class="max-w-full max-h-full object-contain">
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-white audiowide-regular text-xl md:text-2xl tracking-tight leading-none uppercase">SERVIVERDE</span>
+                    <span class="text-lime text-[9px] md:text-[11px] font-bold tracking-[0.2em] uppercase mt-1">Ingeniería & Paisajismo</span>
+                </div>
+            </a>
+            
+            <div class="hidden lg:flex items-center space-x-7 text-white font-medium text-xs uppercase tracking-wider">
+                <a href="index.html" class="hover:text-lime transition-colors">Inicio</a>
+                <a href="nosotros.html" class="hover:text-lime transition-colors">Quiénes Somos</a>
+                
+                <div class="dropdown relative py-2">
+                    <a href="servicios.html" class="flex items-center hover:text-lime transition-colors uppercase">
+                        Servicios <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="servicios.html#vivero" class="block px-6 py-3 hover:bg-lime hover:text-forest transition-colors text-[10px]">Vivero y Plantas</a>
+                        <a href="servicios.html#mantenimiento" class="block px-6 py-3 hover:bg-lime hover:text-forest transition-colors text-[10px]">Mantenimiento</a>
+                        <a href="servicios.html#forestal" class="block px-6 py-3 hover:bg-lime hover:text-forest transition-colors text-[10px]">Área Forestal</a>
+                        <a href="servicios.html#riego" class="block px-6 py-3 hover:bg-lime hover:text-forest transition-colors text-[10px]">Sistemas de Riego</a>
+                    </div>
+                </div>
+
+                <div class="dropdown relative py-2">
+                    <a href="proyectos.html" class="flex items-center text-lime transition-colors uppercase">
+                        Proyectos <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="proyectos.html#jardines" class="block px-6 py-3 hover:bg-lime hover:text-forest transition-colors text-[10px]">Jardines Verticales</a>
+                        <a href="proyectos.html#techos" class="block px-6 py-3 hover:bg-lime hover:text-forest transition-colors text-[10px]">Techos Verdes</a>
+                        <a href="proyectos.html#reforestacion" class="block px-6 py-3 hover:bg-lime hover:text-forest transition-colors text-[10px]">Reforestación</a>
+                        <a href="proyectos.html#riego" class="block px-6 py-3 hover:bg-lime hover:text-forest transition-colors text-[10px]">Riego Tecnificado</a>
+                    </div>
+                </div>
+
+                <a href="portafolio.html" class="hover:text-lime transition-colors">Portafolio</a>
+                <a href="contacto.html" class="bg-lime px-6 py-2.5 rounded-full text-forest font-bold hover:bg-white transition-all shadow-lg shadow-lime/20 hover:shadow-[0_0_20px_rgba(132,204,22,0.6)]">Contáctanos</a>
+            </div>
+
+            <button id="menu-toggle" class="lg:hidden text-white relative z-[1001] p-2">
+                <svg id="icon-open" class="w-8 h-8 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <svg id="icon-close" class="w-8 h-8 absolute top-2 left-2 opacity-0 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-forest/98 backdrop-blur-xl z-[900] transform translate-x-full transition-transform duration-300 flex flex-col pt-32 px-8 lg:hidden overflow-y-auto">
+        <a href="index.html" class="text-lime text-xl font-bold border-b border-white/10 py-4 uppercase">Inicio</a>
+        <a href="nosotros.html" class="text-white hover:text-lime text-xl font-bold border-b border-white/10 py-4 uppercase transition-colors">Quiénes Somos</a>
+        
+        <div class="py-4 border-b border-white/10">
+            <a href="servicios.html" class="text-white hover:text-lime text-xl font-bold uppercase transition-colors block mb-3">Servicios</a>
+            <div class="pl-4 space-y-3 flex flex-col">
+                <a href="servicios.html#vivero" class="text-gray-300 text-sm hover:text-lime">- Vivero y Plantas</a>
+                <a href="servicios.html#mantenimiento" class="text-gray-300 text-sm hover:text-lime">- Mantenimiento</a>
+                <a href="servicios.html#forestal" class="text-gray-300 text-sm hover:text-lime">- Área Forestal</a>
+                <a href="servicios.html#riego" class="text-gray-300 text-sm hover:text-lime">- Sistemas de Riego</a>
+            </div>
+        </div>
+
+        <div class="py-4 border-b border-white/10">
+            <a href="proyectos.html" class="text-white hover:text-lime text-xl font-bold uppercase transition-colors block mb-3">Proyectos</a>
+            <div class="pl-4 space-y-3 flex flex-col">
+                <a href="proyectos.html#jardines" class="text-gray-300 text-sm hover:text-lime">- Jardines Verticales</a>
+                <a href="proyectos.html#techos" class="text-gray-300 text-sm hover:text-lime">- Techos Verdes</a>
+                <a href="proyectos.html#reforestacion" class="text-gray-300 text-sm hover:text-lime">- Reforestación</a>
+            </div>
+        </div>
+
+        <a href="portafolio.html" class="text-white hover:text-lime text-xl font-bold border-b border-white/10 py-4 uppercase transition-colors">Portafolio</a>
+        <a href="contacto.html" class="bg-lime text-forest text-center font-bold py-4 rounded-xl mt-6 uppercase tracking-wider">Contáctanos</a>
+    </div>
+
+    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1449156059307-52204ced8373?auto=format&fit=crop&w=1920&q=80" class="w-full h-full object-cover" alt="Arquitectura Verde">
+            <div class="absolute inset-0 bg-forest/75 backdrop-blur-[3px]"></div>
+        </div>
+        <div class="relative z-10 text-center px-6 reveal">
+            <span class="text-lime font-bold tracking-[0.3em] uppercase text-xs mb-4 block">Diseño y Ejecución</span>
+            <h1 class="text-white audiowide-regular text-4xl md:text-6xl uppercase">Nuestros Proyectos</h1>
+            <p class="text-gray-300 mt-6 max-w-2xl mx-auto font-light">Transformamos planos en ecosistemas vivos, integrando la ingeniería con la belleza natural de forma sostenible.</p>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 space-y-32">
+
+            <div id="jardines" class="grid lg:grid-cols-12 gap-12 items-center reveal">
+                <div class="lg:col-span-7 group relative overflow-hidden rounded-[3rem] shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1592150621344-230ef707532b?auto=format&fit=crop&w=1200&q=80" alt="Jardines Verticales" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute top-8 left-8 bg-lime text-forest font-bold py-2 px-6 rounded-full text-xs uppercase tracking-widest">Premium Gold</div>
+                </div>
+                <div class="lg:col-span-5 space-y-6">
+                    <h2 class="text-3xl md:text-4xl font-bold text-forest italic">Diseño y Ejecución de <span class="text-lime">Jardines Verticales</span></h2>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        Creamos muros vivos que actúan como pulmones urbanos. Nuestro enfoque integra el diseño botánico con estructuras metálicas de alta resistencia y sistemas de riego automatizado ocultos.
+                    </p>
+                    <div class="bg-gray-50 p-8 rounded-3xl border-l-4 border-lime">
+                        <h4 class="font-bold text-forest mb-4 uppercase text-sm tracking-wider">Entregables Clave:</h4>
+                        <ul class="grid grid-cols-1 gap-3 text-sm text-gray-500">
+                            <li class="flex items-center gap-3"><span class="text-lime">●</span> Estudio de incidencia solar y clima.</li>
+                            <li class="flex items-center gap-3"><span class="text-lime">●</span> Selección de paleta vegetal por textura y color.</li>
+                            <li class="flex items-center gap-3"><span class="text-lime">●</span> Instalación de módulos de fieltro polimérico.</li>
+                            <li class="flex items-center gap-3"><span class="text-lime">●</span> Sistema de fertirriego recirculante.</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/51945146837" class="inline-flex items-center text-forest font-bold uppercase text-xs tracking-[0.2em] group">
+                        Consultar este proyecto <span class="ml-3 w-10 h-10 bg-lime rounded-full flex items-center justify-center group-hover:translate-x-2 transition-transform">➔</span>
+                    </a>
+                </div>
+            </div>
+
+            <div id="techos" class="grid lg:grid-cols-12 gap-12 items-center reveal flex-row-reverse">
+                <div class="lg:col-span-5 space-y-6 lg:pr-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-forest italic">Diseño y Ejecución de <span class="text-lime">Techos Verdes</span></h2>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        Convertimos azoteas en espacios recreativos sostenibles. Los techos verdes mejoran el aislamiento térmico del edificio y reducen el efecto de isla de calor urbana.
+                    </p>
+                    <div class="bg-gray-50 p-8 rounded-3xl border-l-4 border-forest">
+                        <h4 class="font-bold text-forest mb-4 uppercase text-sm tracking-wider">Desafío Técnico:</h4>
+                        <ul class="grid grid-cols-1 gap-3 text-sm text-gray-500">
+                            <li class="flex items-center gap-3"><span class="text-forest">●</span> Impermeabilización multicapa anti-raíz.</li>
+                            <li class="flex items-center gap-3"><span class="text-forest">●</span> Capas de drenaje y retención hídrica eficiente.</li>
+                            <li class="flex items-center gap-3"><span class="text-forest">●</span> Sustratos livianos de alta porosidad.</li>
+                            <li class="flex items-center gap-3"><span class="text-forest">●</span> Vegetación tipo sedum o césped de bajo consumo.</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/51945146837" class="inline-flex items-center text-forest font-bold uppercase text-xs tracking-[0.2em] group">
+                        Consultar este proyecto <span class="ml-3 w-10 h-10 bg-lime rounded-full flex items-center justify-center group-hover:translate-x-2 transition-transform">➔</span>
+                    </a>
+                </div>
+                <div class="lg:col-span-7 group relative overflow-hidden rounded-[3rem] shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1558905612-2337e7df4844?auto=format&fit=crop&w=1200&q=80" alt="Techos Verdes" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700">
+                </div>
+            </div>
+
+            <div id="parques" class="grid lg:grid-cols-12 gap-12 items-center reveal">
+                <div class="lg:col-span-7 group relative overflow-hidden rounded-[3rem] shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1200&q=80" alt="Parques y Jardines" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="lg:col-span-5 space-y-6">
+                    <h2 class="text-3xl md:text-4xl font-bold text-forest italic">Diseño de <span class="text-lime">Parques y Jardines</span></h2>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        Arquitectura paisajista para condominios, municipalidades y sedes corporativas. Diseñamos espacios que fomentan la convivencia y el respeto por el medio ambiente.
+                    </p>
+                    <div class="bg-gray-50 p-8 rounded-3xl border-l-4 border-lime">
+                        <h4 class="font-bold text-forest mb-4 uppercase text-sm tracking-wider">Alcance del Proyecto:</h4>
+                        <ul class="grid grid-cols-1 gap-3 text-sm text-gray-500">
+                            <li class="flex items-center gap-3"><span class="text-lime">●</span> Diseño de caminerías y zonas de descanso.</li>
+                            <li class="flex items-center gap-3"><span class="text-lime">●</span> Arborización estratégica para sombra.</li>
+                            <li class="flex items-center gap-3"><span class="text-lime">●</span> Instalación de grass natural en champa.</li>
+                            <li class="flex items-center gap-3"><span class="text-lime">●</span> Iluminación paisajística LED.</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/51945146837" class="inline-flex items-center text-forest font-bold uppercase text-xs tracking-[0.2em] group">
+                        Consultar este proyecto <span class="ml-3 w-10 h-10 bg-lime rounded-full flex items-center justify-center group-hover:translate-x-2 transition-transform">➔</span>
+                    </a>
+                </div>
+            </div>
+
+            <div id="reforestacion" class="grid lg:grid-cols-12 gap-12 items-center reveal flex-row-reverse">
+                <div class="lg:col-span-5 space-y-6 lg:pr-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-forest italic">Proyectos de <span class="text-lime">Reforestación</span></h2>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        Ejecución de planes de recuperación ambiental a gran escala. Plantamos futuro mediante la selección rigurosa de especies nativas que restauran el equilibrio hídrico y del suelo.
+                    </p>
+                    <div class="bg-gray-50 p-8 rounded-3xl border-l-4 border-forest">
+                        <h4 class="font-bold text-forest mb-4 uppercase text-sm tracking-wider">Impacto Ambiental:</h4>
+                        <ul class="grid grid-cols-1 gap-3 text-sm text-gray-500">
+                            <li class="flex items-center gap-3"><span class="text-forest">●</span> Mitigación de huella de carbono.</li>
+                            <li class="flex items-center gap-3"><span class="text-forest">●</span> Control de erosión de laderas.</li>
+                            <li class="flex items-center gap-3"><span class="text-forest">●</span> Plantación masiva técnica con hidrogel.</li>
+                            <li class="flex items-center gap-3"><span class="text-forest">●</span> Mantenimiento y monitoreo de prendimiento.</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/51945146837" class="inline-flex items-center text-forest font-bold uppercase text-xs tracking-[0.2em] group">
+                        Consultar este proyecto <span class="ml-3 w-10 h-10 bg-lime rounded-full flex items-center justify-center group-hover:translate-x-2 transition-transform">➔</span>
+                    </a>
+                </div>
+                <div class="lg:col-span-7 group relative overflow-hidden rounded-[3rem] shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80" alt="Reforestación" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700">
+                </div>
+            </div>
+
+            <div id="riego" class="grid lg:grid-cols-12 gap-12 items-center reveal">
+                <div class="lg:col-span-7 group relative overflow-hidden rounded-[3rem] shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?auto=format&fit=crop&w=1200&q=80" alt="Riego Tecnificado" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="lg:col-span-5 space-y-6">
+                    <h2 class="text-3xl md:text-4xl font-bold text-forest italic">Proyectos de <span class="text-lime">Riego Tecnificado</span></h2>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        Ingeniería hidráulica aplicada al paisaje. Diseñamos redes de riego por goteo y aspersión con automatización total para reducir costos operativos y desperdicio de agua.
+                    </p>
+                    <div class="bg-gray-50 p-8 rounded-3xl border-l-4 border-lime">
+                        <h4 class="font-bold text-forest mb-4 uppercase text-sm tracking-wider">Ingeniería Aplicada:</h4>
+                        <ul class="grid grid-cols-1 gap-3 text-sm text-gray-500">
+                            <li class="flex items-center gap-3"><span class="text-lime">●</span> Planos hidráulicos y cálculo de caudales.</li>
+                            <li class="flex items-center gap-3"><span class="text-lime">●</span> Instalación de electrobombas y tableros.</li>
+                            <li class="flex items-center gap-3"><span class="text-lime">●</span> Automatización WiFi y sensores climáticos.</li>
+                            <li class="flex items-center gap-3"><span class="text-lime">●</span> Tuberías HDPE termofusionadas.</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/51945146837" class="inline-flex items-center text-forest font-bold uppercase text-xs tracking-[0.2em] group">
+                        Consultar este proyecto <span class="ml-3 w-10 h-10 bg-lime rounded-full flex items-center justify-center group-hover:translate-x-2 transition-transform">➔</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contacto" class="py-24 bg-forest text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-lime/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center md:text-left mb-16 reveal">
+                <span class="text-lime font-bold uppercase tracking-[0.2em] text-xs">Ponte en contacto</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-4 italic">¿Hablamos de tu <span class="text-lime">Proyecto?</span></h2>
+                <div class="h-1.5 w-24 bg-lime rounded-full mt-6 mx-auto md:ml-0 shadow-sm"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+                
+                <div class="reveal space-y-10">
+                    
+                    <div>
+                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-2">Línea Directa / WhatsApp</p>
+                        <a href="https://wa.me/51945146837" target="_blank" class="inline-block group">
+                            <h3 class="text-5xl md:text-6xl font-bold text-white group-hover:text-lime transition-colors duration-300 flex items-center gap-4">
+                                945 146 837
+                                <svg class="w-8 h-8 text-lime transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </h3>
+                        </a>
+                    </div>
+
+                    <div>
+                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-4">Correos Electrónicos</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center space-x-3 text-lg">
+                                <span class="text-lime">✉️</span>
+                                <a href="mailto:jdiazc1918@gmail.com" class="hover:text-lime transition-colors">jdiazc1918@gmail.com </a>
+                            </li>
+                            
+                            <li class="flex items-center space-x-3 text-lg">
+                                <span class="text-lime">✉️</span>
+                                <a href="mailto:jose.diaz@serviverde.pe" class="hover:text-lime transition-colors">jose.diaz@serviverde.pe</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-4">Ubicación Principal</p>
+                        <div class="flex items-start space-x-3 text-lg">
+                            <span class="text-lime mt-1">📍</span>
+                            <p>Calle los Algarrobos Mz. 25<br>Umamarca, San Juan de Miraflores<br>Lima, Perú</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-4">Síguenos en nuestras redes</p>
+                        <div class="flex items-center space-x-6">
+                            <a href="#" target="_blank" class="block w-10 h-10">
+                                <img src="../img/facebook logo.png" alt="Facebook" class="w-full h-full object-contain grayscale hover:grayscale-0 hover:scale-110 transition-all duration-300">
+                            </a>
+                            <a href="#" target="_blank" class="block w-10 h-10">
+                                <img src="../img/instagram logo.png" alt="Instagram" class="w-full h-full object-contain grayscale hover:grayscale-0 hover:scale-110 transition-all duration-300">
+                            </a>
+                            <a href="#" target="_blank" class="block w-10 h-10">
+                                <img src="../img/tiktok logo.png" alt="TikTok" class="w-full h-full object-contain grayscale hover:grayscale-0 hover:scale-110 transition-all duration-300">
+                            </a>
+                        </div>
+                        
+                    </div>
+
+                </div>
+                
+                <div class="reveal h-full min-h-[400px]">
+                    <div class="w-full h-full rounded-[2.5rem] shadow-[0_0_40px_rgba(132,204,22,0.15)] border border-lime/20 overflow-hidden relative">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1378.8864575037217!2d-76.98013374410554!3d-12.174966263751339!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b9b3b196ea33%3A0xa4ac80d135fe42ef!2sC.%20los%20Algarrobos%2C%20San%20Juan%20de%20Miraflores%2015058!5e0!3m2!1ses!2spe!4v1772605495782!5m2!1ses!2spe" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0; position: absolute; top:0; left:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Ubicación de SERVIVERDE">
+                        </iframe>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="bg-forest pt-20 pb-10 border-t-4 border-lime relative overflow-hidden">
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-lime/5 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                
+                <div>
+    <div class="mb-6">
+        <a href="index.html" class="block w-56 md:w-64 h-16 md:h-20 bg-white/10 backdrop-blur-md rounded-xl p-2 border border-white/20 shadow-[0_0_15px_rgba(132,204,22,0.1)] hover:shadow-[0_0_25px_rgba(132,204,22,0.3)] hover:scale-105 transition-all duration-300 cursor-pointer">
+            <img src="../img/icono logo con serviverde.png" alt="Logo SERVIVERDE" class="w-full h-full object-contain rounded-lg">
+        </a>
+    </div>
+    <p class="text-green-100/70 text-sm leading-relaxed mb-6 mt-4">
+        Ingeniería y Paisajismo Sostenible. Transformamos espacios mediante rigor técnico, diseño ambiental y seguridad garantizada.
+    </p>
+</div>
+
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-widest text-sm mb-6">Enlaces Rápidos</h4>
+                    <ul class="space-y-4 text-sm text-green-100/70">
+                        <li><a href="index.html" class="hover:text-lime transition-colors">Inicio</a></li>
+                        <li><a href="nosotros.html" class="hover:text-lime transition-colors">Quiénes Somos</a></li>
+                        <li><a href="proyectos.html" class="hover:text-lime transition-colors">Proyectos Realizados</a></li>
+                        <li><a href="portafolio.html" class="hover:text-lime transition-colors">Portafolio / Galería</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-widest text-sm mb-6">Nuestros Servicios</h4>
+                    <ul class="space-y-4 text-sm text-green-100/70">
+                        <li><a href="servicios.html#vivero" class="hover:text-lime transition-colors">Vivero y Venta de Plantas</a></li>
+                        <li><a href="servicios.html#mantenimiento" class="hover:text-lime transition-colors">Mantenimiento de Áreas Verdes</a></li>
+                        <li><a href="servicios.html#forestal" class="hover:text-lime transition-colors">Tala, Poda y Reforestación</a></li>
+                        <li><a href="servicios.html#riego" class="hover:text-lime transition-colors">Sistemas de Riego Tecnificado</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-widest text-sm mb-6">Contacto</h4>
+                    <ul class="space-y-4 text-sm text-green-100/70">
+                        <li class="flex items-start space-x-3">
+                            <span class="text-lime mt-1">📍</span>
+                            <span>Calle los Algarrobos Mz. 25<br>Umamarca, SJM, Lima</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-lime">✉️</span>
+                            <a href="mailto:jdiazc1918@gmail.com" class="hover:text-white transition-colors">jdiazc1918@gmail.com</a>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-lime">✉️</span>
+                            <a href="mailto:jose.diaz@serviverde.pe" class="hover:text-white transition-colors">jose.diaz@serviverde.pe</a>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-lime">📲</span>
+                            <a href="https://wa.me/51945146837" target="_blank" class="hover:text-white transition-colors">945 146 837</a>
+                        </li>
+                    </ul>
+                    <div class="mt-6">
+                        <a href="contacto.html" class="inline-block bg-white/10 border border-white/20 text-white px-6 py-2 rounded-lg text-xs font-bold hover:bg-lime hover:text-forest transition-all uppercase tracking-widest">
+                            Ir a Contacto
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="border-t border-white/10 pt-8 text-center flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-[0.2em] font-bold text-white/30">
+                <p class="mb-4 md:mb-0">© 2026 SERVIVERDE S.A.C. Todos los derechos reservados.</p>
+                <p>Diseñado con pasión por el medio ambiente.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/js.js"></script>
+</body>
+</html>
