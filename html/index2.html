@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SERVIVERDE S.A.C - Ingeniería y Paisajismo Sostenible</title>
+    <!-- Google Fonts: Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: '#1B4332',
+                        nature: '#2D5A27',
+                        lime: '#84CC16',
+                        stone: '#4B5563',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-glass {
+            background: rgba(27, 67, 50, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(132, 204, 22, 0.2);
+        }
+
+        /* Dropdown Estilos */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 250px;
+            background: rgba(27, 67, 50, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(132, 204, 22, 0.2);
+            border-radius: 1rem;
+            padding: 0.5rem 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            z-index: 250;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Slider */
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        .hero-slide.active {
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(27, 67, 50, 0.85));
+        }
+
+        .slide-content {
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 1s ease-out 0.4s;
+        }
+        .hero-slide.active .slide-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* --- MEJORA: BARRAS DE PROGRESO --- */
+        .slider-progress-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        
+        .slider-progress-bar {
+            height: 100%;
+            background-color: #84CC16;
+            width: 0%;
+            box-shadow: 0 0 10px #84CC16;
+        }
+
+        /* Solo la pestaña activa anima su barra */
+        .active-tab .slider-progress-bar {
+            width: 100%;
+            transition: width 8s linear;
+        }
+        
+        /* Glass Tabs Estilo Pulido */
+        .hero-tab {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.6;
+            transform: scale(0.95);
+        }
+        
+        .hero-tab.active-tab {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(132, 204, 22, 0.6);
+            opacity: 1;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(132, 204, 22, 0.2);
+        }
+
+        .hero-tab:hover {
+            opacity: 0.9;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .bg-soft-green {
+            background: linear-gradient(180deg, #F0FDF4 0%, #FFFFFF 100%);
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-white overflow-x-hidden">
+
+    <!-- NAVBAR -->
+    <nav class="fixed w-full z-[400] nav-glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2 group cursor-pointer" onclick="window.scrollTo(0,0)">
+                <div class="w-10 h-10 bg-lime rounded-lg flex items-center justify-center text-forest font-bold text-xl shadow-lg shadow-lime/20">S</div>
+                <div class="flex flex-col">
+                    <span class="text-white font-bold text-xl tracking-tight leading-none uppercase">SERVIVERDE</span>
+                    <span class="text-lime text-[10px] font-bold tracking-[0.2em] uppercase">Ingeniería & Paisajismo</span>
+                </div>
+            </div>
+            
+            <div class="hidden lg:flex items-center space-x-7 text-white font-medium text-xs uppercase tracking-wider">
+                <a href="#inicio" class="hover:text-lime transition-colors">Inicio</a>
+                <a href="#nosotros" class="hover:text-lime transition-colors">Nosotros</a>
+                
+                <div class="dropdown relative py-2">
+                    <button class="flex items-center hover:text-lime transition-colors">
+                        Servicios <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#servicios" class="block px-6 py-3 hover:bg-lime hover:text-forest transition-colors">Producción en Vivero</a>
+                        <a href="#servicios" class="block px-6 py-3 hover:bg-lime hover:text-forest transition-colors">Mantenimiento Integral</a>
+                        <a href="#servicios" class="block px-6 py-3 hover:bg-lime hover:text-forest transition-colors">Sistemas de Riego</a>
+                        <a href="#servicios" class="block px-6 py-3 hover:bg-lime hover:text-forest transition-colors">Diseño de Proyectos</a>
+                        <a href="#servicios" class="block px-6 py-3 hover:bg-lime hover:text-forest transition-colors">Tala y Poda de Altura</a>
+                    </div>
+                </div>
+
+                <a href="#proyectos" class="hover:text-lime transition-colors">Proyectos</a>
+                <a href="#portafolio" class="hover:text-lime transition-colors">Portafolio</a>
+                <a href="#contacto" class="bg-lime px-6 py-2.5 rounded-full text-forest font-bold hover:bg-white transition-all shadow-lg shadow-lime/20">Contáctame</a>
+            </div>
+
+            <button class="lg:hidden text-white"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION (5 VISTAS - 8 SEG) -->
+    <section id="inicio" class="relative h-screen overflow-hidden">
+        
+        <!-- Slide 1: Vivero -->
+        <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1920&q=80');">
+            <div class="absolute inset-0 hero-overlay flex items-center justify-center text-center px-4">
+                <div class="max-w-4xl slide-content">
+                    <span class="bg-lime/20 text-lime px-5 py-1.5 rounded-full text-[10px] font-bold mb-6 inline-block border border-lime/30 backdrop-blur-md uppercase tracking-widest">Producción en Vivero</span>
+                    <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight uppercase">Suministro de <span class="text-lime italic">Plantas e Insumos</span></h1>
+                    <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light leading-relaxed">Venta directa de árboles, palmeras y abonos orgánicos certificados para proyectos de gran escala.</p>
+                    <a href="https://wa.me/51945146837" target="_blank" class="inline-block bg-lime text-forest font-bold py-5 px-12 rounded-2xl text-lg hover:scale-105 transition-transform shadow-xl shadow-lime/20 uppercase tracking-wider">Consultar Catálogo</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Mantenimiento -->
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1592150621344-230ef707532b?auto=format&fit=crop&w=1920&q=80');">
+            <div class="absolute inset-0 hero-overlay flex items-center justify-center text-center px-4">
+                <div class="max-w-4xl slide-content">
+                    <span class="bg-lime/20 text-lime px-5 py-1.5 rounded-full text-[10px] font-bold mb-6 inline-block border border-lime/30 backdrop-blur-md uppercase tracking-widest">Mantenimiento Integral</span>
+                    <h2 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight uppercase">Gestión de <span class="text-lime italic">Áreas Verdes</span></h2>
+                    <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light leading-relaxed">Instalación y mantenimiento de grass, jardines verticales y control fitosanitario especializado.</p>
+                    <a href="https://wa.me/51945146837" target="_blank" class="inline-block bg-white text-forest font-bold py-5 px-12 rounded-2xl text-lg hover:scale-105 transition-transform shadow-xl uppercase tracking-wider">Solicitar Servicio</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Riego -->
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?auto=format&fit=crop&w=1920&q=80');">
+            <div class="absolute inset-0 hero-overlay flex items-center justify-center text-center px-4">
+                <div class="max-w-4xl slide-content">
+                    <span class="bg-lime/20 text-lime px-5 py-1.5 rounded-full text-[10px] font-bold mb-6 inline-block border border-lime/30 backdrop-blur-md uppercase tracking-widest">Riego Tecnificado</span>
+                    <h2 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight uppercase">Ingeniería <span class="text-lime italic text-shadow">Hidráulica</span></h2>
+                    <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light leading-relaxed">Optimización hídrica mediante sistemas por goteo, aspersión y control inteligente.</p>
+                    <a href="https://wa.me/51945146837" target="_blank" class="inline-block bg-lime text-forest font-bold py-5 px-12 rounded-2xl text-lg hover:scale-105 transition-transform shadow-xl shadow-lime/20 uppercase tracking-wider">Ver Soluciones</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Proyectos -->
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1558905612-2337e7df4844?auto=format&fit=crop&w=1920&q=80');">
+            <div class="absolute inset-0 hero-overlay flex items-center justify-center text-center px-4">
+                <div class="max-w-4xl slide-content">
+                    <span class="bg-lime/20 text-lime px-5 py-1.5 rounded-full text-[10px] font-bold mb-6 inline-block border border-lime/30 backdrop-blur-md uppercase tracking-widest">Diseño y Ejecución</span>
+                    <h2 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight uppercase">Arquitectura <span class="text-lime italic">Verde Sostenible</span></h2>
+                    <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light leading-relaxed">Diseño de parques y espacios urbanos con un enfoque en la sostenibilidad natural.</p>
+                    <a href="https://wa.me/51945146837" target="_blank" class="inline-block bg-white text-forest font-bold py-5 px-12 rounded-2xl text-lg hover:scale-105 transition-transform shadow-xl uppercase tracking-wider">Cotizar Proyecto</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Tala y Poda -->
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1920&q=80');">
+            <div class="absolute inset-0 hero-overlay flex items-center justify-center text-center px-4">
+                <div class="max-w-4xl slide-content">
+                    <span class="bg-lime/20 text-lime px-5 py-1.5 rounded-full text-[10px] font-bold mb-6 inline-block border border-lime/30 backdrop-blur-md uppercase tracking-widest">Servicios Forestales</span>
+                    <h2 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight uppercase">Tala y Poda de <span class="text-lime italic text-shadow">Altura</span></h2>
+                    <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light leading-relaxed">Personal experto certificado con SCTR y EPP para servicios de alto riesgo forestal.</p>
+                    <a href="https://wa.me/51945146837" target="_blank" class="inline-block bg-white/20 backdrop-blur-md border border-white/30 text-white font-bold py-5 px-12 rounded-2xl text-lg hover:bg-white/30 transition-all uppercase tracking-wider">Pedir Evaluación</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PESTAÑAS MEJORADAS (5 TABS CON PROGRESO) -->
+        <div class="absolute bottom-12 left-0 right-0 z-30 flex justify-center px-6">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 w-full max-w-6xl">
+                <button onclick="handleManualSlide(0)" id="btn0" class="hero-tab active-tab text-left p-4 rounded-2xl">
+                    <p class="text-[10px] text-lime font-bold uppercase tracking-widest mb-1">01. Vivero</p>
+                    <p class="text-white text-[10px] font-medium hidden md:block">Suministros Premium</p>
+                    <div class="slider-progress-container">
+                        <div class="slider-progress-bar" id="p0"></div>
+                    </div>
+                </button>
+                <button onclick="handleManualSlide(1)" id="btn1" class="hero-tab text-left p-4 rounded-2xl">
+                    <p class="text-[10px] text-lime font-bold uppercase tracking-widest mb-1">02. Mantenimiento</p>
+                    <p class="text-white text-[10px] font-medium hidden md:block">Áreas Verdes</p>
+                    <div class="slider-progress-container">
+                        <div class="slider-progress-bar" id="p1"></div>
+                    </div>
+                </button>
+                <button onclick="handleManualSlide(2)" id="btn2" class="hero-tab text-left p-4 rounded-2xl">
+                    <p class="text-[10px] text-lime font-bold uppercase tracking-widest mb-1">03. Riego</p>
+                    <p class="text-white text-[10px] font-medium hidden md:block">Ingeniería Hídrica</p>
+                    <div class="slider-progress-container">
+                        <div class="slider-progress-bar" id="p2"></div>
+                    </div>
+                </button>
+                <button onclick="handleManualSlide(3)" id="btn3" class="hero-tab text-left p-4 rounded-2xl">
+                    <p class="text-[10px] text-lime font-bold uppercase tracking-widest mb-1">04. Proyectos</p>
+                    <p class="text-white text-[10px] font-medium hidden md:block">Diseño & Obra</p>
+                    <div class="slider-progress-container">
+                        <div class="slider-progress-bar" id="p3"></div>
+                    </div>
+                </button>
+                <button onclick="handleManualSlide(4)" id="btn4" class="hero-tab text-left p-4 rounded-2xl">
+                    <p class="text-[10px] text-lime font-bold uppercase tracking-widest mb-1">05. Forestal</p>
+                    <p class="text-white text-[10px] font-medium hidden md:block">Tala & Poda</p>
+                    <div class="slider-progress-container">
+                        <div class="slider-progress-bar" id="p4"></div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESUMEN NOSOTROS -->
+    <section id="nosotros" class="py-24 bg-soft-green">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+            <div class="reveal">
+                <span class="text-lime font-bold uppercase tracking-[0.2em] text-xs">Nuestra Trayectoria</span>
+                <h2 class="text-4xl font-bold text-forest mt-4 mb-8 leading-tight">Expertos en Transformar Espacios <span class="text-lime italic">Sostenibles</span></h2>
+                <p class="text-gray-600 text-lg mb-8 leading-relaxed">
+                    Bajo la dirección del **Ing. José Díaz**, SERVIVERDE S.A.C se ha consolidado como un referente en la ingeniería paisajística. No solo creamos jardines; cultivamos bienestar mediante el diseño inteligente de áreas verdes.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                    <div class="p-6 bg-white rounded-3xl shadow-lg border-b-4 border-lime flex-1">
+                        <h4 class="font-bold text-forest mb-2 italic">Seguridad Integral</h4>
+                        <p class="text-xs text-gray-500">Personal asegurado con SCTR activo y cumplimiento estricto de normas SSOMA.</p>
+                    </div>
+                    <div class="p-6 bg-white rounded-3xl shadow-lg border-b-4 border-lime flex-1">
+                        <h4 class="font-bold text-forest mb-2 italic">Calidad Técnica</h4>
+                        <p class="text-xs text-gray-500">Ejecución profesional con herramientas de vanguardia y criterios de ingeniería.</p>
+                    </div>
+                </div>
+                <a href="#contacto" class="inline-flex items-center text-forest font-bold group">
+                    Conocer más sobre nosotros
+                    <svg class="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+            </div>
+            <div class="reveal relative">
+                <img src="https://images.unsplash.com/photo-1592150621344-230ef707532b?auto=format&fit=crop&w=800" class="rounded-[2.5rem] shadow-2xl relative z-10 border-8 border-white">
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-lime/10 rounded-full blur-3xl"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESUMEN SERVICIOS -->
+    <section id="servicios" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-forest mb-4">Soluciones de <span class="text-lime italic">Ingeniería Verde</span></h2>
+                <div class="h-1.5 w-24 bg-lime mx-auto rounded-full mb-6 shadow-sm"></div>
+                <p class="text-gray-500 max-w-xl mx-auto">Un servicio integral desde la producción hasta la ingeniería de alta complejidad.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Tarjetas -->
+                <div class="reveal group bg-gray-50 p-10 rounded-[2.5rem] border border-transparent hover:border-lime/30 hover:bg-white transition-all duration-500 hover:shadow-2xl">
+                    <h3 class="text-xl font-bold text-forest mb-4">Producción y Ventas</h3>
+                    <p class="text-gray-500 text-sm mb-8 leading-relaxed">Suministro de plantas ornamentales y abonos orgánicos de nuestra propia producción.</p>
+                    <a href="https://wa.me/51945146837" target="_blank" class="bg-forest text-white px-6 py-3 rounded-2xl text-xs font-bold hover:bg-lime hover:text-forest transition-all inline-block uppercase">Saber más</a>
+                </div>
+                <div class="reveal group bg-gray-50 p-10 rounded-[2.5rem] border border-transparent hover:border-lime/30 hover:bg-white transition-all duration-500 hover:shadow-2xl">
+                    <h3 class="text-xl font-bold text-forest mb-4">Mantenimiento Integral</h3>
+                    <p class="text-gray-500 text-sm mb-8 leading-relaxed">Gestión técnica de jardines verticales, fumigación y nutrición vegetal especializada.</p>
+                    <a href="https://wa.me/51945146837" target="_blank" class="bg-forest text-white px-6 py-3 rounded-2xl text-xs font-bold hover:bg-lime hover:text-forest transition-all inline-block uppercase">Saber más</a>
+                </div>
+                <div class="reveal group bg-gray-50 p-10 rounded-[2.5rem] border border-transparent hover:border-lime/30 hover:bg-white transition-all duration-500 hover:shadow-2xl">
+                    <h3 class="text-xl font-bold text-forest mb-4">Sistemas de Riego</h3>
+                    <p class="text-gray-500 text-sm mb-8 leading-relaxed">Ingeniería hidráulica por goteo y aspersión automática para máximo ahorro hídrico.</p>
+                    <a href="https://wa.me/51945146837" target="_blank" class="bg-forest text-white px-6 py-3 rounded-2xl text-xs font-bold hover:bg-lime hover:text-forest transition-all inline-block uppercase">Saber más</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN CONTACTO -->
+    <section id="contacto" class="py-24 bg-forest text-white">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+            <div class="reveal">
+                <h2 class="text-4xl font-bold mb-6 italic leading-tight">Cosechemos su visión <span class="text-lime">hoy mismo</span>.</h2>
+                <p class="text-green-200 mb-12 text-lg">Hablemos sobre su próximo proyecto de ingeniería paisajística.</p>
+                <div class="space-y-6">
+                    <a href="https://wa.me/51945146837" class="flex items-center space-x-6 p-6 bg-nature/40 rounded-3xl border border-lime/20 hover:bg-lime transition-all group">
+                        <div class="w-12 h-12 bg-lime/20 rounded-xl flex items-center justify-center text-lime group-hover:bg-forest"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg></div>
+                        <div><p class="text-xs text-lime font-bold uppercase group-hover:text-forest">WhatsApp</p><p class="font-bold text-2xl group-hover:text-forest">945 146 837</p></div>
+                    </a>
+                </div>
+            </div>
+            <div class="reveal bg-white p-10 rounded-[2.5rem] shadow-2xl text-gray-800">
+                <form class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <input type="text" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none ring-1 ring-gray-200 focus:ring-2 focus:ring-lime" placeholder="Nombre">
+                        <input type="email" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none ring-1 ring-gray-200 focus:ring-2 focus:ring-lime" placeholder="Correo">
+                    </div>
+                    <textarea class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none ring-1 ring-gray-200 focus:ring-2 focus:ring-lime h-32" placeholder="Describa su proyecto..."></textarea>
+                    <button type="submit" class="w-full bg-lime text-forest font-bold py-5 rounded-2xl hover:bg-forest hover:text-white transition-all uppercase tracking-widest">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-forest py-16 text-center text-white/30 border-t border-nature">
+        <p class="text-[10px] uppercase tracking-[0.4em] font-bold">&copy; 2024 Ingeniería Verde para un Futuro Sostenible.</p>
+    </footer>
+
+    <script>
+        // Reveal animation on scroll
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) reveals[i].classList.add("active");
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
+
+        // --- SLIDER LOGIC (8 SECONDS) ---
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const tabButtons = [
+            document.getElementById('btn0'),
+            document.getElementById('btn1'),
+            document.getElementById('btn2'),
+            document.getElementById('btn3'),
+            document.getElementById('btn4')
+        ];
+        const totalSlides = slides.length;
+        const slideIntervalTime = 8000;
+        let slideTimer;
+
+        function changeSlideAction(index) {
+            // Resetear estado previo
+            slides[currentSlideIndex].classList.remove('active');
+            tabButtons[currentSlideIndex].classList.remove('active-tab');
+            
+            // Limpiar barra del slide que se va
+            const oldBar = tabButtons[currentSlideIndex].querySelector('.slider-progress-bar');
+            oldBar.style.transition = 'none';
+            oldBar.style.width = '0%';
+
+            currentSlideIndex = index;
+            
+            // Preparar nueva barra
+            const bar = tabButtons[currentSlideIndex].querySelector('.slider-progress-bar');
+            bar.style.transition = 'none';
+            bar.style.width = '0%';
+            
+            // Activar nuevo slide
+            setTimeout(() => {
+                bar.style.transition = 'width 8s linear';
+                slides[currentSlideIndex].classList.add('active');
+                tabButtons[currentSlideIndex].classList.add('active-tab');
+            }, 50);
+        }
+
+        function nextSlide() {
+            changeSlideAction((currentSlideIndex + 1) % totalSlides);
+        }
+
+        function startTimer() {
+            slideTimer = setInterval(nextSlide, slideIntervalTime);
+        }
+
+        window.handleManualSlide = function(index) {
+            if (index === currentSlideIndex) return;
+            clearInterval(slideTimer);
+            changeSlideAction(index);
+            startTimer();
+        }
+
+        window.onload = function() {
+            startTimer();
+            // Asegurar que el primer slide inicie su barra
+            const firstBar = document.getElementById('p0');
+            setTimeout(() => {
+                firstBar.style.transition = 'width 8s linear';
+                firstBar.style.width = '100%';
+            }, 100);
+        };
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 80) nav.classList.add('py-2', 'shadow-2xl');
+            else nav.classList.remove('py-2', 'shadow-2xl');
+        });
+    </script>
+</body>
+</html>

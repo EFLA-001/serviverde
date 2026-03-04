@@ -1,0 +1,258 @@
+/* Animaciones de revelación al hacer scroll */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Navegación Glassmorphism */
+.nav-glass {
+    background: rgba(27, 67, 50, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(132, 204, 22, 0.2);
+}
+
+/* Menú Desplegable de Servicios */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 250px;
+    background: rgba(27, 67, 50, 0.98);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(132, 204, 22, 0.2);
+    border-radius: 1rem;
+    padding: 0.5rem 0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    z-index: 500;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero Slider con Efecto Parallax (fijo al scroll) */
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.hero-slide.active {
+    opacity: 1;
+    z-index: 10;
+}
+
+.hero-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(27, 67, 50, 0.9));
+}
+
+.slide-content {
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 1s ease-out 0.4s;
+}
+
+.hero-slide.active .slide-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Pestañas del Hero - Estilo Iluminado */
+.hero-tab {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+.hero-tab.active-tab {
+    background: rgba(132, 204, 22, 0.15);
+    border-color: rgba(132, 204, 22, 1);
+    opacity: 1;
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(132, 204, 22, 0.4), inset 0 0 10px rgba(132, 204, 22, 0.2);
+}
+
+/* Gradientes y fondos suaves */
+.bg-soft-green {
+    background: linear-gradient(180deg, #F0FDF4 0%, #FFFFFF 100%);
+}
+
+/* Efectos de Galería */
+.portfolio-item img {
+    transition: all 0.6s ease;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.1);
+    filter: brightness(0.8);
+}
+
+/* Mapa Responsivo */
+.map-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Relación 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 2.5rem;
+}
+
+.map-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+/* Fuente para el logo */
+.audiowide-regular {
+  font-family: "Audiowide", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Fuente para el logo */
+.audiowide-regular {
+    font-family: "Audiowide", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Ocultar la barra de scroll en el carrusel de pestañas móvil */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Animaciones de revelación al hacer scroll */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Navegación Glassmorphism */
+.nav-glass {
+    background: rgba(27, 67, 50, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(132, 204, 22, 0.2);
+}
+
+/* Menú Desplegable de Servicios */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 250px;
+    background: rgba(27, 67, 50, 0.98);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(132, 204, 22, 0.2);
+    border-radius: 1rem;
+    padding: 0.5rem 0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    z-index: 500;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero Slider con Efecto Parallax (fijo al scroll) */
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.hero-slide.active {
+    opacity: 1;
+    z-index: 10;
+}
+
+.hero-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(27, 67, 50, 0.9));
+}
+
+.slide-content {
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 1s ease-out 0.4s;
+}
+
+.hero-slide.active .slide-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Pestañas del Hero - Estilo Iluminado */
+.hero-tab {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+.hero-tab.active-tab {
+    background: rgba(132, 204, 22, 0.15);
+    border-color: rgba(132, 204, 22, 1);
+    opacity: 1;
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(132, 204, 22, 0.4), inset 0 0 10px rgba(132, 204, 22, 0.2);
+}
+
+/* Gradientes y fondos suaves */
+.bg-soft-green {
+    background: linear-gradient(180deg, #F0FDF4 0%, #FFFFFF 100%);
+}
+
+/* Efectos de Galería */
+.portfolio-item img {
+    transition: all 0.6s ease;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.1);
+    filter: brightness(0.8);
+}
